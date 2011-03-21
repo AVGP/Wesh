@@ -4,11 +4,12 @@ class lessApplication extends App
 	function run()
 	{
 		parent::run();
-		$file = $this->params;
+		$filepath = $this->params;
 		$data = '';
-		if(is_file(getcwd().'/data/'.trim($this->environment['path'],'/').'/'.$file))
+		$path = $this->prepareFilePath($filepath);
+		if(is_file(getcwd().'/data/'.ltrim($path,'/')))
 		{
-			$content = file_get_contents(getcwd().'/data/'.trim($this->environment['path'],'/').'/'.$file);
+			$content = file_get_contents(getcwd().'/data/'.ltrim($path,'/'));
 			$data = $content;
 		}
 		else
@@ -17,5 +18,39 @@ class lessApplication extends App
 		}
 		$this->outputResults($data,$_GET['environment']);
 	}
+	
+	function prepareFilePath($path)
+	{
+		$path_tokens = explode('/', trim($path,'/'));
+		$filename 	 = array_pop($path_tokens); //Remove the filename!
+		$path_new    = array();
+
+		//Relative Paths:
+		if(empty($path_tokens[0]))
+		{
+			$path_new = explode('/', rtrim($this->environment['path'],'/'));
+		}
+
+		//Build new path from tokens:
+		foreach($path_tokens as $dir)
+		{
+			switch($dir)
+			{
+				case null:
+				case '':
+					break;
+				case '..':
+					break;
+				case '.':
+					array_pop($path_new);
+					break;
+				default:
+					$path_new[] = $dir;
+					break;
+			}
+		}
+		return rtrim(implode('/', $path_new),'/').'/'.$filename;
+	}
+	
 }
 ?>
