@@ -29,9 +29,8 @@ class cdApplication extends App
 	{
 		$path_tokens = explode('/', trim($this->params,'/'));
 		$path_new    = array();
-
 		//Relative Paths:
-		if(empty($path_tokens[0]))
+		if(empty($path_tokens[0]) && count($path_tokens) > 1)
 		{
 			$path_new = explode('/', rtrim($this->environment['path'],'/'));
 		}
