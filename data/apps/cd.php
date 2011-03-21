@@ -27,11 +27,11 @@ class cdApplication extends App
 	
 	function prepareNewPath()
 	{
-		$path_tokens = explode('/', rtrim($this->params,'/'));
+		$path_tokens = explode('/', trim($this->params,'/'));
 		$path_new    = array();
 
 		//Relative Paths:
-		if($path_tokens[0] == '')
+		if(empty($path_tokens[0]))
 		{
 			$path_new = explode('/', rtrim($this->environment['path'],'/'));
 		}
@@ -39,13 +39,19 @@ class cdApplication extends App
 		//Build new path from tokens:
 		foreach($path_tokens as $dir)
 		{
-			if($dir != '..')
+			switch($dir)
 			{
-				$path_new[] = $dir;
-			}
-			else if($dir != '.')
-			{
-				array_pop($path_new);
+				case null:
+				case '':
+					break;
+				case '..':
+					break;
+				case '.':
+					array_pop($path_new);
+					break;
+				default:
+					$path_new[] = $dir;
+					break;
 			}
 		}
 
