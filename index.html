@@ -16,11 +16,25 @@ body {
     color:#fff;
     font-family:Arial,Sans,mono-space,sans-serif;
 }
+#content
+{
+	height:90%;
+}
+#prompt
+{
+	background:transparent;
+	color:#fff;
+	border:none;
+	width:100%;
+}
         </style>
     </head>
     <body>
-        <form>
-            <textarea id="shell" rows="30" cols="80">/&gt; </textarea>
+        <form action="javascript:void;">
+            <div id="shell">
+            	<div id="content"></div>
+            	<input id="prompt" value="/&gt; ">
+            </div>
         </form>
     </body>
 </html> 

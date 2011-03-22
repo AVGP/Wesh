@@ -3,14 +3,11 @@ var cmdindex = 0;
 var environment = {"path":"/"};
 
 $(document).ready(function(){
-    $("#shell").keyup(function(event) {
-       if(event.which == 13)
-       {
-           var lines  = $("#shell").val().split("\n");
-           var input  = lines[lines.length-2];
-           var cmd 	  = input.split(" ")[1];
+    $("#shell #prompt").change(function(event) {
+           var line  = $("#prompt").val();
+           var cmd 	  = line.split(" ")[1];
            var params = "";
-           var parts  = input.split(" ");
+           var parts  = line.split(" ");
            for(i=2;i<parts.length;i++)
            {
         	   params += parts[i]+" ";
@@ -29,8 +26,8 @@ $(document).ready(function(){
         		   {'app':cmd,'environment':environmentString,'params':params},
         		   function(data) {
                environment = data.environment;
-        	   $("#shell").val($("#shell").val()+data.data);
-               $("#shell").val($("#shell").val()+environment.path+"> ");
+        	   $("#content").html($("#content").html()+data.data);
+               $("#prompt").val(environment.path+"> ");
                $("#shell").scrollTo("100%",150);
            });
 //Alternative request for debugging, if Response-JSON is invalid.
@@ -40,7 +37,6 @@ $(document).ready(function(){
         		   function(data) {
         			   alert(data);
            });
-*/           
-       }
+*/      
     });
 });
