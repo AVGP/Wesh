@@ -12,7 +12,7 @@ class App
 	
 	function outputResults($result,$environment)
 	{
-		echo '{"status":"OK","data":'.json_encode($result."\n").',"environment":'.$environment.'}';
+		echo '{"status":"OK","data":'.json_encode(nl2br($result)."\n").',"environment":'.$environment.'}';
 	}
 }
 ?>
