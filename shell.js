@@ -28,7 +28,7 @@ $(document).ready(function(){
                environment = data.environment;
         	   $("#content").html($("#content").html()+data.data);
                $("#prompt").val(environment.path+"> ");
-               $("#shell").scrollTo("100%",150);
+               $("#content").scrollTo("100%",150);
            });
 //Alternative request for debugging, if Response-JSON is invalid.
 /*
