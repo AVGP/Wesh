@@ -7,4 +7,6 @@ The default tools are:
 "clear" to clear the console.
 To see the available applications, take a look at /apps/
 
+<a href="https://twitter.com/avgp" target="_blank">Follow me on Twitter</a>
+
 Have fun with this! :)
